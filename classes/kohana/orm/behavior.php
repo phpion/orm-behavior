@@ -10,7 +10,7 @@ abstract class Kohana_ORM_Behavior {
 	/**
 	 * ORM object.
 	 * 
-	 * @var ORM
+	 * @var ORM_Behaviorable
 	 */
 	protected $_orm;
 	
@@ -31,10 +31,10 @@ abstract class Kohana_ORM_Behavior {
 	/**
 	 * Constructor.
 	 * 
-	 * @param ORM $orm ORM object.
+	 * @param ORM_Behaviorable $orm ORM object.
 	 * @param array $config Configuration array.
 	 */
-	public function __construct(ORM $orm, array $config = array()) {
+	public function __construct(ORM_Behaviorable $orm, array $config = array()) {
 		$this->set_orm($orm);
 		$this->set_config($config);
 	}
@@ -113,10 +113,10 @@ abstract class Kohana_ORM_Behavior {
 	/**
 	 * Sets ORM object.
 	 * 
-	 * @param ORM $orm ORM object.
+	 * @param ORM_Behaviorable $orm ORM object.
 	 * @return ORM_Behavior $this
 	 */
-	public function set_orm(ORM $orm) {
+	public function set_orm(ORM_Behaviorable $orm) {
 		$this->_orm = $orm;
 		
 		return $this;
@@ -125,7 +125,7 @@ abstract class Kohana_ORM_Behavior {
 	/**
 	 * Returns ORM object.
 	 * 
-	 * @return ORM ORM object.
+	 * @return ORM_Behaviorable ORM object.
 	 */
 	public function get_orm() {
 		return $this->_orm;
