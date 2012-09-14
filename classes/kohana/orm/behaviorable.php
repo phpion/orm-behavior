@@ -81,6 +81,15 @@ abstract class Kohana_ORM_Behaviorable extends ORM {
 	}
 	
 	/**
+	 * Returns database object.
+	 * 
+	 * @return Database Database object.
+	 */
+	public function db() {
+		return $this->_db;
+	}
+	
+	/**
 	 * Returns database query builder.
 	 * 
 	 * @return Database_Query_Builder_Where Database query builder.
