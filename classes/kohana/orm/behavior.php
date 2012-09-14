@@ -35,8 +35,8 @@ abstract class Kohana_ORM_Behavior {
 	 * @param array $config Configuration array.
 	 */
 	public function __construct(ORM_Behaviorable $orm, array $config = array()) {
-		$this->set_orm($orm);
-		$this->set_config($config);
+		$this->orm($orm);
+		$this->config($config);
 	}
 	
 	/**
@@ -111,54 +111,54 @@ abstract class Kohana_ORM_Behavior {
 	}
 	
 	/**
-	 * Sets ORM object.
+	 * Checks if behavior is enabled.
+	 *
+	 * @return bool TRUE if behavior is enabled, FALSE otherwise.
+	 */
+	public function enabled() {
+		return $this->_enabled === TRUE;
+	}
+	
+	/**
+	 * Gets or sets ORM object.
 	 * 
 	 * @param ORM_Behaviorable $orm ORM object.
-	 * @return ORM_Behavior $this
+	 * @return ORM_Behaviorable|ORM_Behavior
 	 */
-	public function set_orm(ORM_Behaviorable $orm) {
+	public function orm(ORM_Behaviorable $orm = NULL) {
+		if ($orm === NULL) {
+			// Act as a getter
+			return $this->_orm;
+		}
+		
+		// Act as a setter
 		$this->_orm = $orm;
 		
 		return $this;
 	}
 	
 	/**
-	 * Returns ORM object.
-	 * 
-	 * @return ORM_Behaviorable ORM object.
-	 */
-	public function get_orm() {
-		return $this->_orm;
-	}
-	
-	/**
-	 * Sets configuration array
+	 * Gets or sets configuration array
 	 * 
 	 * @param array $config Configuration array
-	 * @return ORM_Behavior $this
+	 * @param bool $override Override current configuration.
+	 * @return array|ORM_Behavior
 	 */
-	public function set_config(array $config) {
-		$this->_config = $config;
+	public function config(array $config = NULL, $override = FALSE) {
+		if ($config === NULL) {
+			// Act as a getter
+			return $this->_config;
+		}
+		
+		// Act as a setter
+		if ($override === TRUE) {
+			$this->_config = $config;
+		}
+		else {
+			$this->_config = array_merge($this->_config, $config);
+		}
 		
 		return $this;
-	}
-	
-	/**
-	 * Returns configuration array.
-	 * 
-	 * @return array Configuration array.
-	 */
-	public function get_config() {
-		return $this->_config;
-	}
-	
-	/**
-	 * Checks if behavior is enabled.
-	 * 
-	 * @return bool TRUE if behavior is enabled, FALSE otherwise.
-	 */
-	public function enabled() {
-		return $this->_enabled === TRUE;
 	}
 	
 	/**
